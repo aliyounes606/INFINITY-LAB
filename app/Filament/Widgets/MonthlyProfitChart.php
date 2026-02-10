@@ -53,4 +53,5 @@ class MonthlyProfitChart extends ChartWidget
     {
         return 'bar'; // Bar chart
     }
+    public static function canView(): bool { return auth()->user()->hasRole('Admin'); }
 }

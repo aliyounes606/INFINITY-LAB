@@ -22,6 +22,12 @@ class UserSeeder extends Seeder
             'password' => bcrypt('12345678'),
         ]);
         $accountant->assignRole('Accountant');
+    
+      $Material_Manager = User::firstOrCreate([
+            'name' => 'Material Manager User',
+            'email' => 'MaterialManager@example.com',
+            'password' => bcrypt('12345678'),
+        ]);
+       $Material_Manager->assignRole('Material Manager');
     }
 }
-

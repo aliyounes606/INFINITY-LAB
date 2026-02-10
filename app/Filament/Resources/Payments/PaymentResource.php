@@ -21,7 +21,8 @@ class PaymentResource extends Resource
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
     protected static ?string $recordTitleAttribute = 'amount';
-
+    public static function shouldRegisterNavigation(): bool 
+     { return auth()->user()->hasAnyRole('Accountant','Admin'); }
     public static function form(Schema $schema): Schema
     {
         return PaymentForm::configure($schema);

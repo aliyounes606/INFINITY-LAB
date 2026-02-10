@@ -25,7 +25,8 @@ class MaterialResource extends Resource
 
 
     protected static ?string $recordTitleAttribute = 'name';
-
+    public static function shouldRegisterNavigation(): bool 
+     { return auth()->user()->hasAnyRole('Material Manager','Admin'); }
     public static function form(Schema $schema): Schema
     {
         return MaterialForm::configure($schema);

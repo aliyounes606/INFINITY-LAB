@@ -7,7 +7,7 @@ use App\Models\InvoiceItem;
 class Material extends Model
 {
     //
-     protected $fillable = [ 'name', 'price', 'status'];
+     protected $fillable = [ 'name', 'price', 'quantity','status'];
       public function invoiceItems()
     {
         return $this->hasMany(InvoiceItem ::class);

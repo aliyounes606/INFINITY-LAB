@@ -22,6 +22,8 @@ class ExpenseResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'amount';
 
+    public static function shouldRegisterNavigation(): bool 
+     { return auth()->user()->hasAnyRole('Accountant','Admin'); }
     public static function form(Schema $schema): Schema
     {
         return ExpenseForm::configure($schema);

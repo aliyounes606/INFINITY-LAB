@@ -26,7 +26,7 @@ class MaterialsTable
                 TextColumn::make('price')
                     ->label('price')
                     ->sortable(),
-
+TextColumn::make('quantity')->label('Quantity') ->sortable(),
                 BadgeColumn::make('status')
                     ->label('status')
                     ->colors([

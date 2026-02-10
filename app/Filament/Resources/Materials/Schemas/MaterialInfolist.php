@@ -15,10 +15,11 @@ class MaterialInfolist
 
             TextEntry::make('price')
                 ->label('price'),
-
+          TextEntry::make('quantity')
+                ->label('quantity'),
             TextEntry::make('status')
                 ->label('status'),
-
+      
             TextEntry::make('created_at')
                 ->label('created at ')
                 ->date(),

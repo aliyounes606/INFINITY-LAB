@@ -17,6 +17,8 @@ class UserResource extends Resource
     protected static ?string $model = User::class;
 
     protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-users';
+        public static function shouldRegisterNavigation(): bool 
+     { return auth()->user()->hasRole('Admin'); }
     public static function form(Schema $schema): Schema
     {
         return $schema
