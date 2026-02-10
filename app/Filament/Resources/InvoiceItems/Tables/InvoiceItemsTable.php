@@ -32,6 +32,11 @@ class InvoiceItemsTable
                     ->label('Material')
                     ->sortable(),
 
+                TextColumn::make('patient_name')
+                    ->label('Patient')
+                    ->sortable(),
+
+
                 TextColumn::make('quantity')
                     ->label('Qty')
                     ->alignCenter(),
@@ -41,7 +46,7 @@ class InvoiceItemsTable
                     ->money('USD'),
 
                 IconColumn::make('has_design')
-                    ->label('Design')
+                    ->label('DSN')
                     ->boolean()
                     ->alignCenter(),
 
