@@ -44,4 +44,5 @@ class ProfitWidget extends StatsOverviewWidget
             ->color('primary'),
         ];
     }
+    public static function canView(): bool { return auth()->user()->hasRole('Admin'); }
 }

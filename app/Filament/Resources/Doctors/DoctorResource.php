@@ -19,7 +19,8 @@ class DoctorResource extends Resource
     protected static ?string $model = Doctor::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
-
+    public static function shouldRegisterNavigation(): bool 
+     { return auth()->user()->hasAnyRole('Material Manager','Accountant','Admin'); }
     public static function form(Schema $schema): Schema
     {
         return $schema

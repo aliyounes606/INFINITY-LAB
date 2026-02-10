@@ -24,7 +24,8 @@ class InvoiceItemResource extends Resource
 {
     protected static ?string $model = InvoiceItem::class;
     protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-rectangle-stack';
-
+    public static function shouldRegisterNavigation(): bool 
+     { return auth()->user()->hasAnyRole('Accountant','Admin'); }
     public static function form(Schema $schema): Schema
     {
         return $schema

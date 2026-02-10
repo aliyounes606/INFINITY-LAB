@@ -31,4 +31,5 @@ protected int|string|array $columnSpan = '1/2';
     {
         return 'bar';
     }
+    public static function canView(): bool { return auth()->user()->hasRole('Admin'); }
 }

@@ -14,12 +14,14 @@ class MaterialForm
             ->components([
                 //
                 TextInput::make('name')->label(' name')->required(),
+               
                 TextInput::make('price')->label('price')->numeric()->nullable(),
+                TextInput::make('quantity')->label('Quantity') ->numeric() ->minValue(0) ->default(0) ->required(),
                 Select::make('status')->label('status')->options([
                     'available' => 'available',
                     'Unavailable ' => ' Unavailable',
                 ])->default('available'),
-
+ 
             ]);
     }
 }
