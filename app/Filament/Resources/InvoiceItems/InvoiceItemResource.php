@@ -24,8 +24,10 @@ class InvoiceItemResource extends Resource
 {
     protected static ?string $model = InvoiceItem::class;
     protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-rectangle-stack';
-    public static function shouldRegisterNavigation(): bool 
-     { return auth()->user()->hasAnyRole('Accountant','Admin'); }
+    public static function shouldRegisterNavigation(): bool
+    {
+        return auth()->user()->hasAnyRole('Accountant', 'Admin');
+    }
     public static function form(Schema $schema): Schema
     {
         return $schema
@@ -33,13 +35,19 @@ class InvoiceItemResource extends Resource
                 Grid::make(2)->schema([
                     Select::make('doctor_id')
                         ->label('Doctor')
-                        ->options(\App\Models\Doctor::all()->pluck('name', 'id')) 
+                        ->options(\App\Models\Doctor::all()->pluck('name', 'id'))
                         ->searchable()
                         ->required(),
+                    TextInput::make('patient_name')
+                        ->label('Patient Name')
+                        ->placeholder('Enter patient full name')
+                        ->nullable()
+                        ->maxLength(255),
+
 
                     Select::make('material_id')
                         ->label('Material / Work Type')
-                        ->options(Material::query()->where('status','available')->pluck('name', 'id')) 
+                        ->options(Material::query()->where('status', 'available')->pluck('name', 'id'))
                         ->searchable()
                         ->reactive()
                         ->afterStateUpdated(function ($state, callable $set) {
@@ -48,16 +56,32 @@ class InvoiceItemResource extends Resource
                                 $set('unit_price', $material->price);
                             }
                         })
+
                         ->required(),
+                    // ->columnSpanFull(),
                 ]),
 
                 Grid::make(3)->schema([
+
                     TextInput::make('quantity')
                         ->numeric()
                         ->default(1)
                         ->required()
                         ->reactive()
-                        ->label('Qty'),
+                        ->label('Qty')
+                        ->rules([
+                            fn($get): \Closure => function (string $attribute, $value, \Closure $fail) use ($get) {
+                                $materialId = $get('material_id');
+                                if (!$materialId)
+                                    return;
+
+                                $material = Material::find($materialId);
+
+                                if (!$material || $material->quantity < $value) {
+                                    $fail("Not enough stock available (Current: {$material?->quantity}).");
+                                }
+                            },
+                        ]),
 
                     TextInput::make('unit_price')
                         ->numeric()

@@ -9,25 +9,32 @@ class UserSeeder extends Seeder
 {
     public function run(): void
     {
-        $admin = User::firstOrCreate([
-            'name' => 'Admin User',
-            'email' => 'admin@example.com',
-            'password' => bcrypt('12345678'),
-        ]);
+        // نمرر الإيميل فقط في المصفوفة الأولى للبحث
+        $admin = User::firstOrCreate(
+            ['email' => 'admin@example.com'], // شرط البحث
+            [
+                'name' => 'Admin User',
+                'password' => bcrypt('12345678'),
+            ] // البيانات التي تضاف في حال لم يتم العثور عليه
+        );
         $admin->assignRole('Admin');
 
-        $accountant = User::firstOrCreate([
-            'name' => 'Accountant User',
-            'email' => 'accountant@example.com',
-            'password' => bcrypt('12345678'),
-        ]);
+        $accountant = User::firstOrCreate(
+            ['email' => 'accountant@example.com'],
+            [
+                'name' => 'Accountant User',
+                'password' => bcrypt('12345678'),
+            ]
+        );
         $accountant->assignRole('Accountant');
-    
-      $Material_Manager = User::firstOrCreate([
-            'name' => 'Material Manager User',
-            'email' => 'MaterialManager@example.com',
-            'password' => bcrypt('12345678'),
-        ]);
-       $Material_Manager->assignRole('Material Manager');
+
+        $Material_Manager = User::firstOrCreate(
+            ['email' => 'MaterialManager@example.com'],
+            [
+                'name' => 'Material Manager User',
+                'password' => bcrypt('12345678'),
+            ]
+        );
+        $Material_Manager->assignRole('Material Manager');
     }
 }

@@ -17,6 +17,7 @@ class InvoiceItem extends Model
         'has_design',
         'design_price',
         'cycle_code',
+        'patient_name',
     ];
 
     
