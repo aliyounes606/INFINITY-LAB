@@ -31,6 +31,9 @@ class InvoiceItemsTable
                 TextColumn::make('material.name')
                     ->label('Material')
                     ->sortable(),
+                TextColumn::make('shade.name')
+                    ->label('CLR')
+                    ->sortable(),
 
                 TextColumn::make('patient_name')
                     ->label('Patient')
