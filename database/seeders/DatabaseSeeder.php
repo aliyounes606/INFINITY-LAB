@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class,
             UserSeeder::class,
             MaterialSeeder::class,
+            ShadeSeeder::class,
         ]);
     }
 }

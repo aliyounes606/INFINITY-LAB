@@ -27,6 +27,7 @@ class InvoiceItemResource extends Resource
     public static function shouldRegisterNavigation(): bool
     {
         return auth()->user()->hasAnyRole('Accountant', 'Admin');
+        // return true;
     }
     public static function form(Schema $schema): Schema
     {
@@ -59,6 +60,22 @@ class InvoiceItemResource extends Resource
 
                         ->required(),
                     // ->columnSpanFull(),
+                    Select::make('shade_id')
+                        ->label('Shade / Color')
+                        ->options(\App\Models\Shade::all()->pluck('name', 'id')) // جلب الألوان
+                        ->searchable()
+                        ->preload() // تحميل القائمة مسبقاً للأداء السريع
+                        ->nullable()
+
+                        //  زر لإضافة لون جديد فوراً دون الخروج من الفاتورة
+                        ->createOptionForm([
+                            TextInput::make('name')
+                                ->required()
+                                ->unique('shades', 'name'),
+                        ])
+                        ->createOptionUsing(function (array $data) {
+                            return \App\Models\Shade::create($data)->id;
+                        }),
                 ]),
 
                 Grid::make(3)->schema([

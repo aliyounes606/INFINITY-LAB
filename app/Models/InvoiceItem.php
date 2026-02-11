@@ -18,6 +18,7 @@ class InvoiceItem extends Model
         'design_price',
         'cycle_code',
         'patient_name',
+        'shade_id',
     ];
 
     
@@ -93,5 +94,9 @@ class InvoiceItem extends Model
     public function material()
     {
         return $this->belongsTo(Material::class);
+    }
+    public function shade()
+    {
+        return $this->belongsTo(Shade::class);
     }
 }
