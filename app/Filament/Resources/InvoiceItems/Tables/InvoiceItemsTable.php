@@ -7,7 +7,9 @@ use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
+use Filament\Actions\ViewAction;
 use Filament\Forms\Components\DatePicker;
+use Filament\Tables\Actions\ActionGroup;
 use Filament\Tables;
 use Filament\Tables\Columns\Summarizers\Sum;
 use Filament\Tables\Filters\SelectFilter;
@@ -37,6 +39,7 @@ class InvoiceItemsTable
 
                 TextColumn::make('patient_name')
                     ->label('Patient')
+                    ->searchable()
                     ->sortable(),
 
 
@@ -84,8 +87,11 @@ class InvoiceItemsTable
                     })
             ])
             ->actions([
-                EditAction::make(),
-                DeleteAction::make(),
+                \Filament\Actions\ActionGroup::make([
+                    ViewAction::make(),
+                    EditAction::make(),
+                    DeleteAction::make(),
+                ])->icon('heroicon-m-ellipsis-vertical'),
             ])
             ->bulkActions([
                 BulkActionGroup::make([

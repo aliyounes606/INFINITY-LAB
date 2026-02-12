@@ -215,11 +215,12 @@
                 <tr>
                     <th style="width: 10%; text-align: left; border-radius: 10px 0 0 0;">Date</th>
                     <th style="width: 18%; text-align: left;">Patient Name</th>
-                    <th style="width: 22%; text-align: left;">Service Description</th>
+                    <th style="width: 18%; text-align: left;">Service Description</th>
+                    <th style="width: 8%; text-align: center;">Shade</th>
                     <th style="width: 8%; text-align: center;">Qty</th>
-                    <th style="width: 12%; text-align: left;">Unit Price</th>
-                    <th style="width: 12%; text-align: left;">Design Price</th>
-                    <th style="width: 12%; text-align: right; border-radius: 0 10px 0 0;">Total Amount</th>
+                    <th style="width: 10%; text-align: left;">Unit Price</th>
+                    <th style="width: 10%; text-align: left;">Design Price</th>
+                    <th style="width: 10%; text-align: right; border-radius: 0 10px 0 0;">Total Amount</th>
                 </tr>
             </thead>
             <tbody>
@@ -228,6 +229,13 @@
                         <td style="color: #64748b;">{{ $item->created_at->format('d M, Y') }}</td>
                         <td style="color: #0f172a; font-weight: 500;">{{ $item->patient_name }}</td>
                         <td style="font-weight: bold; color: #1e293b;">{{ $item->material->name }}</td>
+                        <td style="text-align: center; color: #0f172a; font-weight: bold;">
+                            @if($item->shade)
+                                {{ $item->shade->name }}
+                            @else
+                                <span style="color: #cbd5e1;">-</span>
+                            @endif
+                        </td>
                         <td style="text-align: center; color: #0f172a; font-weight: bold;">{{ $item->quantity }}</td>
                         <td><span class="currency">USD</span>{{ number_format($item->unit_price, 2) }}</td>
                         <td>
