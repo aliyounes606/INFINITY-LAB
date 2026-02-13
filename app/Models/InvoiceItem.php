@@ -51,7 +51,7 @@ class InvoiceItem extends Model
 
                 // تحديث الحالة إذا صارت الكمية صفر
                 if ($item->material->quantity <= 0) {
-                    $item->material->status = 'unavailable';
+                    $item->material->status = 'Unavailable';
                     $item->material->save();
                 }
             } else {
@@ -81,7 +81,7 @@ class InvoiceItem extends Model
 
             // تحديث الحالة بعد أي تعديل
             if ($item->material->quantity <= 0) {
-                $item->material->status = 'unavailable';
+                $item->material->status = 'Unavailable';
             } else {
                 $item->material->status = 'available';
             }
@@ -97,7 +97,7 @@ class InvoiceItem extends Model
 
             // تحديث الحالة بعد الحذف
             if ($item->material->quantity <= 0) {
-                $item->material->status = 'unavailable';
+                $item->material->status = 'Unavailable';
             } else {
                 $item->material->status = 'available';
             }
