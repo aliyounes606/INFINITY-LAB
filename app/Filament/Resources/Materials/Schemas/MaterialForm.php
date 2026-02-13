@@ -19,7 +19,7 @@ class MaterialForm
                 TextInput::make('quantity')->label('Quantity') ->numeric() ->minValue(0) ->default(0) ->required(),
                 Select::make('status')->label('status')->options([
                     'available' => 'available',
-                    'Unavailable ' => ' Unavailable',
+                    'Unavailable' => 'Unavailable',
                 ])->default('available'),
  
             ]);

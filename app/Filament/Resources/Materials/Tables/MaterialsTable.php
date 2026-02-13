@@ -8,7 +8,6 @@ use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
 use Filament\Tables\Columns\BadgeColumn;
 use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Columns\TextInputColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 
@@ -17,40 +16,46 @@ class MaterialsTable
     public static function configure(Table $table): Table
     {
         return $table
-          
-
             ->columns([
                 TextColumn::make('name')
-                    ->label('name')
+                    ->label('Name')
                     ->searchable(),
+
                 TextColumn::make('price')
-                    ->label('price')
+                    ->label('Price')
                     ->sortable(),
-TextColumn::make('quantity')->label('Quantity') ->sortable(),
+
+                TextColumn::make('quantity')
+                    ->label('Quantity')
+                    ->sortable(),
+
                 BadgeColumn::make('status')
-                    ->label('status')
+                    ->label('Status')
+                    // ->colors([
+                    //     'success' => 'available',
+                    //     'danger' => 'unavailable',
+                    // ])
                     ->colors([
-                        'success' => 'Available',
-                        'danger' => 'Unavailable',
-                    ]),
+    'success' => 'available',
+    'danger' => 'Unavailable',
+])
+->formatStateUsing(fn ($state) => ucfirst($state)),
 
                 TextColumn::make('created_at')
-                    ->label('created at')
+                    ->label('Created At')
                     ->date(),
             ])
 
-            
             ->filters([
                 SelectFilter::make('status')
-                    ->label('status')
+                    ->label('Status')
                     ->options([
-                        'Available' => 'Available',
-                        ' unavailable' => ' unavailable',
+                        'available' => 'Available',
+                        'Unavailable' => 'Unavailable',
                     ]),
             ])
 
             ->recordActions([
-                // ViewAction::make(),
                 EditAction::make(),
                 \Filament\Actions\DeleteAction::make(),
             ])
