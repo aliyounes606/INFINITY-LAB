@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('materials', function (Blueprint $table) {
             $table->id();
             $table->string('name'); 
-            $table->decimal('price', 10, 1)->nullable();;
-             $table->string('status')->default('Available');
+            $table->decimal('price', 10, 1)->nullable();
+             $table->string('status')->nullable();
             $table->timestamps();
         });
     }
